@@ -38,8 +38,8 @@
 							"copyBehavior": "PreserveHierarchy",
 							"metadata": [
 								{
-									"name": "me",
-									"value": ""
+									"name": "metadata_default",
+									"value": "1"
 								}
 							]
 						},
