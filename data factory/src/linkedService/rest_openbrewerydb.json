@@ -1,0 +1,13 @@
+{
+	"name": "rest_openbrewerydb",
+	"properties": {
+		"description": "REST API to get open API of global breweries",
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://api.openbrewerydb.org/breweries",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
