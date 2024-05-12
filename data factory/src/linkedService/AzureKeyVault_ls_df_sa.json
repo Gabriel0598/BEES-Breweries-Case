@@ -1,0 +1,11 @@
+{
+	"name": "AzureKeyVault_ls_df_sa",
+	"properties": {
+		"description": "Key Vault that connect Data Factory and Storage Account",
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://keyvault-breweries-df-sa.vault.azure.net/"
+		}
+	}
+}
