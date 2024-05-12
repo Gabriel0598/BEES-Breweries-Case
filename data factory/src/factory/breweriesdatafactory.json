@@ -1,0 +1,9 @@
+{
+	"name": "breweriesdatafactory",
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "fa79f860-ea86-4ec7-b5dd-618af216c996",
+		"tenantId": "a01c6abf-622f-418f-adfc-dc982c4686da"
+	}
+}
