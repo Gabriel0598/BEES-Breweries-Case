@@ -38,6 +38,7 @@
 							"copyBehavior": "PreserveHierarchy",
 							"metadata": [
 								{
+									"name": "me",
 									"value": ""
 								}
 							]
