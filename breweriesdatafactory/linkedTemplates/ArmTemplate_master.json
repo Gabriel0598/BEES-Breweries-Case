@@ -1,0 +1,84 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "breweriesdatafactory"
+		},
+		"AzureDataLakeStorage_breweries_servicePrincipalCredential": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalCredential' of 'AzureDataLakeStorage_breweries'"
+		},
+		"AzureDataLakeStorage_breweries_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://breweriesdatalakestorage.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage_breweries_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "a01c6abf-622f-418f-adfc-dc982c4686da"
+		},
+		"AzureDataLakeStorage_breweries_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "4b2ca1e6-92b0-4f15-99f3-a28f867489aa"
+		},
+		"AzureKeyVault_ls_df_sa_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://keyvault-breweries-df-sa.vault.azure.net/"
+		},
+		"rest_openbrewerydb_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://api.openbrewerydb.org/breweries"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "breweriesdatafactory_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureDataLakeStorage_breweries_servicePrincipalCredential": {
+						"value": "[parameters('AzureDataLakeStorage_breweries_servicePrincipalCredential')]"
+					},
+					"AzureDataLakeStorage_breweries_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage_breweries_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStorage_breweries_properties_typeProperties_tenant": {
+						"value": "[parameters('AzureDataLakeStorage_breweries_properties_typeProperties_tenant')]"
+					},
+					"AzureDataLakeStorage_breweries_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('AzureDataLakeStorage_breweries_properties_typeProperties_servicePrincipalId')]"
+					},
+					"AzureKeyVault_ls_df_sa_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault_ls_df_sa_properties_typeProperties_baseUrl')]"
+					},
+					"rest_openbrewerydb_properties_typeProperties_url": {
+						"value": "[parameters('rest_openbrewerydb_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

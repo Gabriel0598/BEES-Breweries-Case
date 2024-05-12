@@ -1,0 +1,345 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "breweriesdatafactory"
+		},
+		"AzureDataLakeStorage_breweries_servicePrincipalCredential": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalCredential' of 'AzureDataLakeStorage_breweries'"
+		},
+		"AzureDataLakeStorage_breweries_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://breweriesdatalakestorage.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage_breweries_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "a01c6abf-622f-418f-adfc-dc982c4686da"
+		},
+		"AzureDataLakeStorage_breweries_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "4b2ca1e6-92b0-4f15-99f3-a28f867489aa"
+		},
+		"AzureKeyVault_ls_df_sa_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://keyvault-breweries-df-sa.vault.azure.net/"
+		},
+		"rest_openbrewerydb_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://api.openbrewerydb.org/breweries"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/ingestion_pipeline_breweries_data')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Full pipeline from API Rest through linked services connecting to storage account and databricks",
+				"activities": [
+					{
+						"name": "Copy data from rest breweries",
+						"description": "Copy json files from source (API Rest - Brewries) and store them in storage account",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Destination",
+								"value": "synapse-user/raw_data_breweries/json/"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"paginationRules": {
+									"supportRFC5988": "true"
+								}
+							},
+							"sink": {
+								"type": "JsonSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings",
+									"copyBehavior": "PreserveHierarchy",
+									"metadata": [
+										{
+											"name": "metadata_default",
+											"value": "1"
+										}
+									]
+								},
+								"formatSettings": {
+									"type": "JsonWriteSettings",
+									"filePattern": "setOfObjects"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "$['id']"
+										},
+										"sink": {
+											"path": "id"
+										}
+									},
+									{
+										"source": {
+											"path": "$['name']"
+										},
+										"sink": {
+											"path": "name"
+										}
+									},
+									{
+										"source": {
+											"path": "$['brewery_type']"
+										},
+										"sink": {
+											"path": "brewery_type"
+										}
+									},
+									{
+										"source": {
+											"path": "$['address_1']"
+										},
+										"sink": {
+											"path": "address_1"
+										}
+									},
+									{
+										"source": {
+											"path": "$['address_2']"
+										},
+										"sink": {
+											"path": "address_2"
+										}
+									},
+									{
+										"source": {
+											"path": "$['address_3']"
+										},
+										"sink": {
+											"path": "address_3"
+										}
+									},
+									{
+										"source": {
+											"path": "$['city']"
+										},
+										"sink": {
+											"path": "city"
+										}
+									},
+									{
+										"source": {
+											"path": "$['state_province']"
+										},
+										"sink": {
+											"path": "state_province"
+										}
+									},
+									{
+										"source": {
+											"path": "$['postal_code']"
+										},
+										"sink": {
+											"path": "postal_code"
+										}
+									},
+									{
+										"source": {
+											"path": "$['country']"
+										},
+										"sink": {
+											"path": "country"
+										}
+									},
+									{
+										"source": {
+											"path": "$['longitude']"
+										},
+										"sink": {
+											"path": "longitude"
+										}
+									},
+									{
+										"source": {
+											"path": "$['latitude']"
+										},
+										"sink": {
+											"path": "latitude"
+										}
+									},
+									{
+										"source": {
+											"path": "$['phone']"
+										},
+										"sink": {
+											"path": "phone"
+										}
+									},
+									{
+										"source": {
+											"path": "$['website_url']"
+										},
+										"sink": {
+											"path": "website_url"
+										}
+									},
+									{
+										"source": {
+											"path": "$['state']"
+										},
+										"sink": {
+											"path": "state"
+										}
+									},
+									{
+										"source": {
+											"path": "$['street']"
+										},
+										"sink": {
+											"path": "street"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RestResource_breweries",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Json_file_breweries_rest",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/RestResource_breweries')]",
+				"[concat(variables('factoryId'), '/datasets/Json_file_breweries_rest')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Json_file_breweries_rest')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage_breweries",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "raw_data_breweries/json",
+						"fileSystem": "synapse-user"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage_breweries')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RestResource_breweries')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "rest_openbrewerydb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/rest_openbrewerydb')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage_breweries')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('AzureDataLakeStorage_breweries_properties_typeProperties_url')]",
+					"tenant": "[parameters('AzureDataLakeStorage_breweries_properties_typeProperties_tenant')]",
+					"servicePrincipalId": "[parameters('AzureDataLakeStorage_breweries_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalCredentialType": "ServicePrincipalKey",
+					"servicePrincipalCredential": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStorage_breweries_servicePrincipalCredential')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureKeyVault_ls_df_sa')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Key Vault that connect Data Factory and Storage Account",
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('AzureKeyVault_ls_df_sa_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/rest_openbrewerydb')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "REST API to get open API of global breweries",
+				"annotations": [],
+				"type": "RestService",
+				"typeProperties": {
+					"url": "[parameters('rest_openbrewerydb_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

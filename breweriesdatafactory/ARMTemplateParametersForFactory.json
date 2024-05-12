@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "breweriesdatafactory"
+		},
+		"AzureDataLakeStorage_breweries_servicePrincipalCredential": {
+			"value": ""
+		},
+		"AzureDataLakeStorage_breweries_properties_typeProperties_url": {
+			"value": "https://breweriesdatalakestorage.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage_breweries_properties_typeProperties_tenant": {
+			"value": "a01c6abf-622f-418f-adfc-dc982c4686da"
+		},
+		"AzureDataLakeStorage_breweries_properties_typeProperties_servicePrincipalId": {
+			"value": "4b2ca1e6-92b0-4f15-99f3-a28f867489aa"
+		},
+		"AzureKeyVault_ls_df_sa_properties_typeProperties_baseUrl": {
+			"value": "https://keyvault-breweries-df-sa.vault.azure.net/"
+		},
+		"rest_openbrewerydb_properties_typeProperties_url": {
+			"value": "https://api.openbrewerydb.org/breweries"
+		}
+	}
+}
