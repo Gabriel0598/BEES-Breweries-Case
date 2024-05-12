@@ -89,61 +89,97 @@
 							{
 								"source": {
 									"path": "$['address_2']"
+								},
+								"sink": {
+									"path": "address_2"
 								}
 							},
 							{
 								"source": {
 									"path": "$['address_3']"
+								},
+								"sink": {
+									"path": "address_3"
 								}
 							},
 							{
 								"source": {
 									"path": "$['city']"
+								},
+								"sink": {
+									"path": "city"
 								}
 							},
 							{
 								"source": {
 									"path": "$['state_province']"
+								},
+								"sink": {
+									"path": "state_province"
 								}
 							},
 							{
 								"source": {
 									"path": "$['postal_code']"
+								},
+								"sink": {
+									"path": "postal_code"
 								}
 							},
 							{
 								"source": {
 									"path": "$['country']"
+								},
+								"sink": {
+									"path": "country"
 								}
 							},
 							{
 								"source": {
 									"path": "$['longitude']"
+								},
+								"sink": {
+									"path": "longitude"
 								}
 							},
 							{
 								"source": {
 									"path": "$['latitude']"
+								},
+								"sink": {
+									"path": "latitude"
 								}
 							},
 							{
 								"source": {
 									"path": "$['phone']"
+								},
+								"sink": {
+									"path": "phone"
 								}
 							},
 							{
 								"source": {
 									"path": "$['website_url']"
+								},
+								"sink": {
+									"path": "website_url"
 								}
 							},
 							{
 								"source": {
 									"path": "$['state']"
+								},
+								"sink": {
+									"path": "state"
 								}
 							},
 							{
 								"source": {
 									"path": "$['street']"
+								},
+								"sink": {
+									"path": "street"
 								}
 							}
 						]
