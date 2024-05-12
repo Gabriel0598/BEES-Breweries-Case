@@ -1,0 +1,153 @@
+{
+	"name": "ingestion_pipeline_breweries_data",
+	"properties": {
+		"description": "Full pipeline from API Rest through linked services connecting to storage account and databricks",
+		"activities": [
+			{
+				"name": "Copy data from rest breweries",
+				"description": "Copy json files from source (API Rest - Brewries) and store them in storage account",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Destination",
+						"value": "synapse-user/raw_data_breweries/json/"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"paginationRules": {
+							"supportRFC5988": "true"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "PreserveHierarchy",
+							"metadata": [
+								{
+									"value": ""
+								}
+							]
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings",
+							"filePattern": "setOfObjects"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['id']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['name']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['brewery_type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address_1']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address_2']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address_3']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['city']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['state_province']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['postal_code']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['country']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['longitude']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['latitude']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['phone']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['website_url']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['state']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['street']"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "RestResource_breweries",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Json_file_breweries_rest",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}

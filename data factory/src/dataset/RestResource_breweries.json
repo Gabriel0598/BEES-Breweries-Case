@@ -1,0 +1,12 @@
+{
+	"name": "RestResource_breweries",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "rest_openbrewerydb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"name": "Json_file_breweries_rest",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage_breweries",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "raw_data_breweries/json",
+				"fileSystem": "synapse-user"
+			}
+		},
+		"schema": {}
+	}
+}
