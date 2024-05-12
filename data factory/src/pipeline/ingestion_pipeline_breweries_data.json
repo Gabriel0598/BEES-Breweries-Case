@@ -57,21 +57,33 @@
 							{
 								"source": {
 									"path": "$['id']"
+								},
+								"sink": {
+									"path": "id"
 								}
 							},
 							{
 								"source": {
 									"path": "$['name']"
+								},
+								"sink": {
+									"path": "name"
 								}
 							},
 							{
 								"source": {
 									"path": "$['brewery_type']"
+								},
+								"sink": {
+									"path": "brewery_type"
 								}
 							},
 							{
 								"source": {
 									"path": "$['address_1']"
+								},
+								"sink": {
+									"path": "address_1"
 								}
 							},
 							{
