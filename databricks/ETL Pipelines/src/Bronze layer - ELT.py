@@ -37,4 +37,4 @@ df.count()
 
 # COMMAND ----------
 
-df.saveAsTable()
+df.write.format("delta").mode("append").save("/FileStore/tables/bronze/")
