@@ -14,3 +14,12 @@ Instructions:
 7. Monitoring/Alerting: Describe how you would implement a monitoring and alerting process for this pipeline. Consider data quality issues, pipeline failures, and other potential problems in your response.
 8. Repository: Create a public repository on GitHub with your solution. Document your design choices, trade-offs, and provide clear instructions on how to run your application.
 9. Cloud Services: If your solution requires any cloud services, please provide instructions on how to set them up. Please do not post them in your public repository.
+
+### PREPARTION
+- In order to prepare the environment for this test is required to create an Azure Account or log in into an existing one (<https://learn.microsoft.com/en-us/dotnet/azure/create-azure-account>).
+- Into Azure portal create a group of resources following a template according to: <https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/template-tutorial-create-first-template?tabs=azure-powershell>.
+- Use json template files located in this repository ("conf/*.json")
+- Afterward it follows the test through resources:
+    - Azure Data Factory (Get data from API REST (Open breweries) and store in Storage Account)
+    - Azure Data Lake Storage Gen2 (Landing zone for raw data)
+    - Azure Databricks (Used to create a medallion architecture: bronze - DBFS/ silver - delta table/ gold - aggregated view)
