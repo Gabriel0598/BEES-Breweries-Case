@@ -1,0 +1,27 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vulnerabilityAssessments_Default_storageContainerPath": {
+            "value": null
+        },
+        "vaults_keyvault_breweries_df_sa_name": {
+            "value": null
+        },
+        "automationAccounts_auto_shutdown_name": {
+            "value": null
+        },
+        "workspaces_breweriesazdatabricks_name": {
+            "value": null
+        },
+        "workspaces_breweries_synapse_analytics_name": {
+            "value": null
+        },
+        "storageAccounts_breweriesdatalakestorage_name": {
+            "value": null
+        },
+        "templateSpecs_Template_Resource_Group_BEES_Case_name": {
+            "value": null
+        }
+    }
+}
