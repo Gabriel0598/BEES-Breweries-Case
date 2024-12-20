@@ -95,13 +95,13 @@ df_null_add.show(3, False)
 
 # COMMAND ----------
 
-+---------+---------+---------+------------+---------+-------------+------------------------------------+---------+------------+---------------------------------------------+----------+-----------+----------+--------------+------+-----------------------------+
-|address_1|address_2|address_3|brewery_type|city     |country      |id                                  |latitude |longitude   |name                                         |phone     |postal_code|state     |state_province|street|website_url                  |
-+---------+---------+---------+------------+---------+-------------+------------------------------------+---------+------------+---------------------------------------------+----------+-----------+----------+--------------+------+-----------------------------+
-|NULL     |NULL     |NULL     |micro       |Mesa     |United States|0faa0fb2-fffa-416d-9eab-46f67477c8ef|33.436188|-111.5860662|12 West Brewing Company - Production Facility|NULL      |85207      |Arizona   |Arizona       |NULL  |NULL                         |
-|NULL     |NULL     |NULL     |micro       |Crosslake|United States|b7b68d22-5045-4501-b9bf-ec94946eaffc|NULL     |NULL        |14 Lakes Brewery                             |2186924129|56442      |Minnesota |Minnesota     |NULL  |NULL                         |
-|NULL     |NULL     |NULL     |micro       |Mariposa |United States|fe6b9893-b93e-43d5-a9f6-3e0c89a3f13c|37.570148|-119.9036592|1850 Brewing Company                         |NULL      |95338      |California|California    |NULL  |http://www.1850restaurant.com|
-+---------+---------+---------+------------+---------+-------------+------------------------------------+---------+------------+---------------------------------------------+----------+-----------+----------+--------------+------+-----------------------------+
+# +---------+---------+---------+------------+---------+-------------+------------------------------------+---------+------------+---------------------------------------------+----------+-----------+----------+--------------+------+-----------------------------+
+# |address_1|address_2|address_3|brewery_type|city     |country      |id                                  |latitude |longitude   |name                                         |phone     |postal_code|state     |state_province|street|website_url                  |
+# +---------+---------+---------+------------+---------+-------------+------------------------------------+---------+------------+---------------------------------------------+----------+-----------+----------+--------------+------+-----------------------------+
+# |NULL     |NULL     |NULL     |micro       |Mesa     |United States|0faa0fb2-fffa-416d-9eab-46f67477c8ef|33.436188|-111.5860662|12 West Brewing Company - Production Facility|NULL      |85207      |Arizona   |Arizona       |NULL  |NULL                         |
+# |NULL     |NULL     |NULL     |micro       |Crosslake|United States|b7b68d22-5045-4501-b9bf-ec94946eaffc|NULL     |NULL        |14 Lakes Brewery                             |2186924129|56442      |Minnesota |Minnesota     |NULL  |NULL                         |
+# |NULL     |NULL     |NULL     |micro       |Mariposa |United States|fe6b9893-b93e-43d5-a9f6-3e0c89a3f13c|37.570148|-119.9036592|1850 Brewing Company                         |NULL      |95338      |California|California    |NULL  |http://www.1850restaurant.com|
+# +---------+---------+---------+------------+---------+-------------+------------------------------------+---------+------------+---------------------------------------------+----------+-----------+----------+--------------+------+-----------------------------+
 
 # COMMAND ----------
 
